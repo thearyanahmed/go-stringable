@@ -2,8 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/thearyanahmed/go-stringable/stringable"
 )
 
 func main() {
-	// str :=
+	x := stringable.ToStringable("Hello world")
+
+	fmt.Println(x.ToLower().SnakeCase().Get())
 }
+

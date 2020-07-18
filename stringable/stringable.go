@@ -2,18 +2,31 @@ package stringable
 
 import (
 	"strings"
-	"regexp"
 )
 
-type Banana string
+type Str struct {
+	Value string
+}
+//
+//var (
+//	matchFirstCap = regexp.MustCompile("(.)([A-Z][a-z]+)")
+//	matchAllCap   = regexp.MustCompile("([a-z0-9])([A-Z])")
+//)
 
-var (
-	matchFirstCap = regexp.MustCompile("(.)([A-Z][a-z]+)")
-	matchAllCap   = regexp.MustCompile("([a-z0-9])([A-Z])")
-)
+func ToStringable(str string) *Str {
+	return &Str{Value: str}
+}
 
-func (s *Str) SnakeCase() string {
-	snake := matchFirstCap.ReplaceAllString(s, "${1}_${2}")
-    snake  = matchAllCap.ReplaceAllString(snake, "${1}_${2}")
-    return strings.ToLower(snake)
+func (s *Str) ToLower() *Str {
+	s.Value = strings.ToLower(s.Value)
+	return s
+}
+
+func (s *Str) SnakeCase() *Str {
+	s.Value = strings.ReplaceAll(s.Value," ","_")
+	return s
+}
+
+func (s *Str) Get() string {
+	return s.Value
 }
